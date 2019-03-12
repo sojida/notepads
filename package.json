@@ -4,10 +4,17 @@
   "description": "An app that actually takes note...lol",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node ./api/index.js",
-    "start:dev": "nodemon --exec babel-node ./api/index.js",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --require @babel/register ./test/*.test.js --timeout 20000 --exit",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "start": "npm run build:start",
+    "build": "babel ./server/src -d ./server/build",
+    "build:undo": "rm -rf ./server/build",
+    "build:start": "npm run build && node ./server/build/index.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./server/src/index.js",
+    "test": "npm run test:db && cross-env NODE_ENV=test nyc --reporter=html --reporter=text --reporter=lcov mocha --require @babel/register ./server/test/*.test.js --timeout 20000 --exit",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "test:db": "cross-env NODE_ENV=test npm run migrate:undo && cross-env NODE_ENV=test npm run migrate && cross-env NODE_ENV=test npm run seed",
+    "migrate": "sequelize db:migrate",
+    "seed": "sequelize db:seed:all",
+    "migrate:undo": "sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
@@ -31,14 +38,20 @@
     "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "cross-env": "^5.2.0",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "mocha": "^6.0.2",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "pg": "^7.8.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.43.0"
   },
   "devDependencies": {
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "nyc": "^13.3.0"
+    "nyc": "^13.3.0",
+    "sequelize-cli": "^5.4.0"
   }
 }
