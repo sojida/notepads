@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../api/index';
+import app from '../src/index';
 
 
 chai.use(chaiHttp);
@@ -16,3 +16,9 @@ describe('HOMEPAGE', () => {
       });
   });
 });
+
+export {
+  chai,
+  expect,
+  app,
+};
