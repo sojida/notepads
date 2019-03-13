@@ -5,20 +5,12 @@ module.exports = {
       title: 'Manchester united',
       note: 'Manchester united are a victorious team',
       tag: 'Manchester united',
-      deleted: false,
-      deletedon: null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
     },
     {
       id: 'b5f7f2c7-b5b9-47dd-bfea-3372f95404c9',
       title: 'Chelsea',
       note: 'Chelsea are a not so victorious team',
       tag: 'Chelsea',
-      deleted: false,
-      deletedon: null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
     }], {}), /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
