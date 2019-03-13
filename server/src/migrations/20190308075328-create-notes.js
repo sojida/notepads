@@ -9,28 +9,32 @@ module.exports = {
         primaryKey: true,
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       note: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       tag: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       deleted: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       deletedon: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: null,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
+      },
     });
   },
   down:(queryInterface, Sequelize) => {
