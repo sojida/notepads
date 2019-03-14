@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import {
-  app, chai, expect, deleteid, deleteidNotFound, updatedId, missingId,
+  app, chai, expect, deleteid, deleteidNotFound, updatedId, missingId, NoteId, wrongNoteId,
 } from './index.test';
 
 describe('GET ALL NOTES', () => {
@@ -20,6 +20,22 @@ describe('GET ALL NOTES', () => {
   });
 });
 
+describe('GET A SINGLE NOTE', () => {
+  it('should respond with a single note', (done) => {
+    chai.request(app)
+      .get(`/api/v1/notes/${NoteId}`)
+      .end((err, res) => {
+        const { status, data } = res.body;
+        expect(status).to.equal(200);
+        if (data.length) {
+          expect(data[0]).to.have.property('id');
+          expect(data[0]).to.have.property('note');
+          expect(data[0]).to.have.property('tag');
+        }
+        done();
+      });
+  });
+});
 describe('CREATE A NOTE', () => {
   it('should create a note', (done) => {
     chai.request(app)
@@ -40,7 +56,21 @@ describe('CREATE A NOTE', () => {
         done();
       });
   });
+});
+describe('GET A SINGLE NOTE', () => {
+  it('should respond with 404 status code error for wrong Id', (done) => {
+    chai.request(app)
+      .get(`/api/v1/notes/${wrongNoteId}`)
+      .end((err, res) => {
+        const { error, status } = res.body;
+        expect(status).to.equal(400);
+        expect(error).to.equal('Please input a valid id');
+        done();
+      });
+  });
+});
 
+describe('GET A SINGLE NOTE', () => {
   it('should respond with an error', (done) => {
     chai.request(app)
       .post('/api/v1/notes')
