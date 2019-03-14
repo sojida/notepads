@@ -1,7 +1,7 @@
-import GetNoteById from './middleware';
+// import GetNoteById from './middleware';
 
-const validate = {
-  GetNoteById,
-};
+// const validate = {
+//   GetNoteById,
+// };
 
-export default validate;
+// export default validate;
