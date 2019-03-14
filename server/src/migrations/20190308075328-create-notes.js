@@ -18,9 +18,11 @@ module.exports = {
     },
     deleted: {
       type: Sequelize.BOOLEAN,
+      defaultValue: false,
     },
     deletedon: {
       type: Sequelize.DATE,
+      defaultValue: Sequelize.fn('now'),
     },
     createdAt: {
       allowNull: false,
