@@ -12,6 +12,20 @@ class Notes {
     });
   }
 
+  static async createNote(req, res) {
+    const { title, note, tag } = req.body;
+    const Note = await notes.create({
+      title,
+      note,
+      tag,
+
+    });
+    res.status(201).send({
+      message: 'Created Note successfully',
+      data: Note,
+    });
+  }
+
   static async deleteNote(req, res) {
     const newStat = {
       deleted: true,
