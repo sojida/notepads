@@ -1,3 +1,4 @@
-import validateNote from './createNote';
+import middleware from './middleware';
 
-export { validateNote };
+// eslint-disable-next-line import/prefer-default-export
+export { middleware };

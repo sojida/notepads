@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     note: DataTypes.STRING,
     tag: DataTypes.STRING,
     deleted: DataTypes.BOOLEAN,
-    deletedon: DataTypes.STRING,
+    deletedon: DataTypes.DATE,
   }, {});
 
 
