@@ -18,6 +18,7 @@ class Notes {
       title,
       note,
       tag,
+
     });
     res.status(201).send({
       message: 'Created Note successfully',
