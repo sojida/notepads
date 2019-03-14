@@ -36,23 +36,6 @@ class middleware {
     }
     return next();
   }
-
-  static async getNoteById(req, res, next) {
-    const schema = Joi.object().keys({
-      id: Joi.string().uuid(),
-    });
-    Joi.validate({ id: req.params.id }, schema, (err, value) => {
-      if (err) {
-        res.status(404).send({
-          error: {
-            status: 404,
-            message: 'Invalid Id',
-          },
-        });
-      }
-      return next();
-    });
-  }
 }
 
 export default middleware;

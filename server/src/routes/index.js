@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/notes', Notes.list);
 
-router.get('/notes/:id', middleware.getNoteById, Notes.getOneNote);
+router.get('/notes/:id', middleware.checkId, Notes.getOneNote);
 router.delete('/notes/:id', middleware.checkId, Notes.deleteNote);
 
 router.post('/notes', middleware.validateNote, Notes.createNote);

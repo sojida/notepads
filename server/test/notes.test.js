@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
 import {
-  app, chai, expect, NoteId, applicationUrl, wrongNoteId,
+  app, chai, expect, NoteId, wrongNoteId,
   deleteid, deleteidNotFound,
 } from './index.test';
 
 describe('GET ALL NOTES', () => {
   it('should respond with all notes', (done) => {
     chai.request(app)
-      .get(applicationUrl)
+      .get('/api/v1/notes')
       .end((err, res) => {
         const { status, data } = res.body;
         expect(status).to.equal(200);
@@ -24,7 +24,7 @@ describe('GET ALL NOTES', () => {
 describe('GET A SINGLE NOTE', () => {
   it('should respond with a single note', (done) => {
     chai.request(app)
-      .get(`${applicationUrl}${NoteId}`)
+      .get(`/api/v1/notes/${NoteId}`)
       .end((err, res) => {
         const { status, data } = res.body;
         expect(status).to.equal(200);
@@ -61,14 +61,11 @@ describe('CREATE A NOTE', () => {
 describe('GET A SINGLE NOTE', () => {
   it('should respond with 404 status code error for wrong Id', (done) => {
     chai.request(app)
-      .get(`${applicationUrl}${wrongNoteId}`)
+      .get(`/api/v1/notes/${wrongNoteId}`)
       .end((err, res) => {
-        const { error } = res.body;
-        expect(error.status).to.equal(404);
-        if (error.length) {
-          expect(error).to.have.property('status');
-          expect(error).to.have.property('message');
-        }
+        const { error, status } = res.body;
+        expect(status).to.equal(400);
+        expect(error).to.equal('Please input a valid id');
         done();
       });
   });
