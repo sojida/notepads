@@ -22,15 +22,17 @@ module.exports = {
     },
     deletedon: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.fn('now'),
+      defaultValue: null,
     },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
+      defaultValue: Sequelize.fn('now'),
     },
     updatedAt: {
       allowNull: false,
       type: Sequelize.DATE,
+      defaultValue: Sequelize.fn('now'),
     },
   }),
   down: (queryInterface, Sequelize) => queryInterface.dropTable('notes'),
