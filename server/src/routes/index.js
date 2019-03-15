@@ -1,18 +1,19 @@
 import express from 'express';
-// import Notes from '../controllers/notes';
-// import Getone from '../controllers/GetOne';
-// import validate from '../middleware/index';
-import { Notes } from '../controllers';
+import { Notes, Users } from '../controllers';
 import { middleware } from '../middlewares';
 
 const router = express.Router();
 
 router.get('/notes', Notes.list);
+router.get('/users', Users.usersList);
 
 router.get('/notes/:id', middleware.checkId, Notes.getOneNote);
+
 router.delete('/notes/:id', middleware.checkId, Notes.deleteNote);
 
 router.post('/notes', middleware.validateNote, Notes.createNote);
+
+router.post('/users', middleware.validateUser, middleware.checkIfUserExist, Users.createUser);
 
 router.put('/notes/:id', middleware.checkId, middleware.checksIfIdExists, middleware.checkUpdateFields, Notes.updateNote);
 

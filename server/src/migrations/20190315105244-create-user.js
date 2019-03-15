@@ -1,12 +1,13 @@
 
 
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Users', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('users', {
     id: {
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
       allowNull: false,
-      autoIncrement: true,
+      unique: true,
       primaryKey: true,
-      type: Sequelize.INTEGER,
     },
     firstName: {
       type: Sequelize.STRING,
@@ -23,11 +24,13 @@ module.exports = {
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
+      defaultValue: Sequelize.fn('now'),
     },
     updatedAt: {
       allowNull: false,
       type: Sequelize.DATE,
+      defaultValue: Sequelize.fn('now'),
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Users'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('users'),
 };
