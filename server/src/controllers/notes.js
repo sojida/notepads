@@ -68,6 +68,22 @@ class Notes {
       });
     }
   }
+
+  static async updateNote(req, res) {
+    const noteId = req.params.id;
+    const { title, note, tags } = req.body;
+    const updatedNote = await notes.update({ title, note, tags },
+      {
+        where: { id: noteId },
+        returning: true,
+      });
+
+    return res.status(200).json({
+      status: 200,
+      message: 'note updated successfully',
+      data: updatedNote,
+    });
+  }
 }
 
 export default Notes;

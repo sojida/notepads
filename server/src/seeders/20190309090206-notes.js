@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('notes', [
     {
@@ -5,6 +6,12 @@ module.exports = {
       title: 'Manchester united',
       note: 'Manchester united are a victorious team',
       tag: 'Manchester united',
+    },
+    {
+      id: 'fa3def47-153a-40bd-8181-a1c787e083d6',
+      title: 'Manchester city',
+      note: 'Manchester city the real kings of manchester',
+      tag: 'Manchester city',
     },
     {
       id: 'b5f7f2c7-b5b9-47dd-bfea-3372f95404c9',

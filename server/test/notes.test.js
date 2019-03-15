@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import {
-  app, chai, expect, NoteId, wrongNoteId,
-  deleteid, deleteidNotFound,
+  app, chai, expect, deleteid, deleteidNotFound, updatedId, missingId, NoteId, wrongNoteId,
 } from './index.test';
 
 describe('GET ALL NOTES', () => {
@@ -113,6 +112,60 @@ describe('DELETE A NOTE', () => {
         const { status, error } = res.body;
         expect(status).to.equal(404);
         expect(error).to.be.equal('Note not found');
+        done();
+      });
+  });
+});
+
+describe('UPDATE A NOTE', () => {
+  it('should update a not succesfully', () => {
+    const note = {
+      title: 'update a note',
+      note: 'This is a test to update my note',
+      tag: 'Test',
+    };
+    chai.request(app)
+      .put(`/api/v1/notes/${updatedId}`)
+      .send(note)
+      .end((err, res) => {
+        const { status } = res.body;
+        expect(status).to.equal(200);
+      });
+  });
+
+  it('should throw an error when the id is not in the db', (done) => {
+    const notex = {
+      title: 'update a note',
+      note: 'This is a test to update my note',
+      tag: 'Test',
+    };
+    chai.request(app)
+      .put(`/api/v1/notes/${missingId}`)
+      .send(notex)
+      .end((err, res) => {
+        const { error } = res.body;
+        expect(error).to.deep.equal({ message: 'Note does not exist' });
+        done();
+      });
+  });
+
+  it('should throw an error when the route does not exist', (done) => {
+    chai.request(app)
+      .put('/api/v1/notes/')
+      .end((err, res) => {
+        const { error } = res.body;
+        expect(error).to.deep.equal({ message: 'endpoint does not exist' });
+        done();
+      });
+  });
+
+  it('should throw an error when no field is provided for update', (done) => {
+    chai.request(app)
+      .put(`/api/v1/notes/${updatedId}`)
+      .send({})
+      .end((err, res) => {
+        const { error } = res.body;
+        expect(error).to.deep.equal({ message: 'enter a field for update' });
         done();
       });
   });
