@@ -4,7 +4,7 @@
   "description": "An app that actually takes note...lol",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build:start",
+    "start": "node ./server/build/index.js",
     "build": "babel ./server/src -d ./server/build",
     "build:undo": "rm -rf ./server/build",
     "build:start": "npm run build && node ./server/build/index.js",

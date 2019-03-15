@@ -8,15 +8,14 @@ const env = process.env.NODE_ENV;
 const config = configSetup[env];
 const db = {};
 
-// For database
-// let sequelize;
-// if (config.use_env_variable) {
-//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
-// } else {
-//   sequelize = new Sequelize(config.database, config.username, config.password, config);
-// }
+let sequelize;
+if (config.url) {
+  sequelize = new Sequelize(process.env.DATABASE_URL, config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+// const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 fs
   .readdirSync(__dirname)
