@@ -18,10 +18,8 @@ module.exports = {
     operatorsAliases: false,
   },
   production: {
-    username: 'root',
-    password: null,
-    database: 'database_production',
-    host: '127.0.0.1',
-    dialect: 'mysql',
+    url: process.env.DATABASE_URL,
+    dialect: 'postgres',
+    operatorsAliases: false,
   },
 };
