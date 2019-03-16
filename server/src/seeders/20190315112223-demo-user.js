@@ -1,4 +1,10 @@
 /* eslint-disable no-unused-vars */
+const bcryptjs = require('bcryptjs');
+require('dotenv').config();
+
+const password = bcryptjs.hashSync(process.env.USER_PASSWORD, 8);
+
+
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('users', [
     {
@@ -6,7 +12,7 @@ module.exports = {
       firstName: 'amaechi',
       lastName: 'chuks',
       email: 'amaechichuks2000@yahoo.com',
-      password: 'chuks',
+      password,
     },
   ], {}),
 
