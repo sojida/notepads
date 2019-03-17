@@ -18,25 +18,9 @@ module.exports = {
       title: 'Chelsea',
       note: 'Chelsea are a not so victorious team',
       tag: 'Chelsea',
-    }], {}), /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+    }], {}),
 
 
   down: (queryInterface, Sequelize) => queryInterface.bulkDelete('notes', null, {})
-  /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
   ,
 };

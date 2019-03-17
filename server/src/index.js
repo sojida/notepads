@@ -1,5 +1,6 @@
 import '@babel/polyfill';
 import express from 'express';
+import bodyParser from 'body-parser';
 import db from './models/index';
 import routes from './routes/index';
 
@@ -7,6 +8,8 @@ import routes from './routes/index';
 const app = express();
 
 app.use(express.json());
+// support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.send('Welcome to the NotePads API');
