@@ -16,7 +16,7 @@ class Users {
       firstName,
       lastName,
       email,
-      hash,
+      password: hash,
     });
     delete newUser.dataValues.password;
     res.status(201).json({

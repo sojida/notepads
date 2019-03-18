@@ -5,6 +5,7 @@ import { middleware } from '../middlewares';
 const router = express.Router();
 
 router.get('/notes', Notes.list);
+
 router.get('/users', Users.usersList);
 
 router.get('/notes/:id', middleware.checkId, Notes.getOneNote);
